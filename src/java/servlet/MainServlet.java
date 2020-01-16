@@ -1,7 +1,10 @@
 
 package servlet;
 
+import entity.Category;
+import entity.CategorySubCategory;
 import entity.Client;
+import entity.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -11,19 +14,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.CategoryFacade;
+import session.CategorySubCategoryFacade;
 import session.ClientFacade;
+import session.SubCategoryFacade;
 
 
 @WebServlet(name = "MainServlet", urlPatterns = {
     "/index",
     "/newClient",
     "/addClient",
-    "/showClientList"
+    "/showClientList",
+    "/newCategory",
+    "/addCategory",
+    "/showCategoryList",
+    "/newSubCategory",
+    "/addSubCategory", 
+    "/newStage",
+    "/addStage",
+    
 
 })
 public class MainServlet extends HttpServlet {
 @EJB private ClientFacade clientFacade;
-    
+@EJB private CategoryFacade categoryFacade;
+@EJB private SubCategoryFacade subCategoryFacade;
+@EJB private CategorySubCategoryFacade categorySubCategoryFacade;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,7 +54,7 @@ public class MainServlet extends HttpServlet {
                                
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
-                
+//-------- клиент -----------            
             case "/newClient": // показывает страницу нового клиента
                 
                 request.getRequestDispatcher("/WEB-INF/newClient.jsp").forward(request, response);
@@ -66,6 +83,94 @@ public class MainServlet extends HttpServlet {
                 
                 request.getRequestDispatcher("/WEB-INF/showClientList.jsp").forward(request, response);
                 break;
+    
+                
+//-------- категория -----------            
+            case "/newCategory": // показывает страницу 
+                
+                request.getRequestDispatcher("/WEB-INF/newCategory.jsp").forward(request, response);
+                break;
+        
+            case "/addCategory": // создает категорию
+                String categoryName =request.getParameter("categoryName");
+                
+                 //создаем запись в БД
+                Category category = new Category(categoryName);
+                categoryFacade.create(category);
+                request.setAttribute("category", category);
+                
+                // отправляем название категорий в переменную на странице и обновляем ее.
+                request.setAttribute("info", "Категория "+category.getCategoryName()+" добавленa");
+                request.getRequestDispatcher("newCategory").forward(request, response);
+                break;
+            
+             case "/showCategoryList": // показывает страницу всех категорий
+                List<Category> listAllCategories = categoryFacade.findAll();
+                request.setAttribute("listAllCategories", listAllCategories);
+                
+                request.getRequestDispatcher("/WEB-INF/showCategoryList.jsp").forward(request, response);
+                break;
+    
+//-------- ПОДкатегория -----------             
+            case "/newSubCategory": // показывает страницу 
+                listAllCategories = categoryFacade.findAll();
+                request.setAttribute("listAllCategories", listAllCategories);
+                
+                request.getRequestDispatcher("/WEB-INF/newSubCategory.jsp").forward(request, response);
+                break;
+        
+            case "/addSubCategory": // создает категорию
+                //собираем данные
+                String categoryId = request.getParameter("categoryId");
+                String subCategoryName =request.getParameter("subCategoryName");
+                
+                // проверка на заполненное поле и пустое поле
+                if(null == categoryId || "".equals(categoryId)
+                      ||  null == subCategoryName || "".equals(subCategoryName))
+                        {
+                  request.setAttribute("info", "Запомните и выберите все поля");
+                  request.getRequestDispatcher("/newSubCategory")
+                          .forward(request, response);
+                }
+                //парсим и находим по категориИД категорию в БД.
+                category = categoryFacade.find(Long.parseLong(categoryId));
+                //Создаем новый объект КатегориюПодкатегори
+                CategorySubCategory categorySubCategory = new CategorySubCategory();
+                
+                
+                //создаем запись в БД в таблице подкатегорий
+                SubCategory subCategory = new SubCategory(subCategoryName);
+                subCategoryFacade.create(subCategory);
+                request.setAttribute("subCategory", subCategory);
+                
+                //создаем запись в БД в таблице Катория--Подкатегория связь 1 - *
+                categorySubCategory.setCategory(category);
+                categorySubCategory.setSubCategory(subCategory);
+                categorySubCategoryFacade.create(categorySubCategory);
+                        
+                request.setAttribute("info", "Подкатегория "+subCategory.getSubCategoryName()+" добавленa");
+                request.getRequestDispatcher("/newStage").forward(request, response);
+                break;    
+//        
+////-------- ЭТАПЫ -----------            
+//            case "/newStage": // показывает страницу 
+//                request.setAttribute(path, phone);
+//                request.getRequestDispatcher("/WEB-INF/newStage.jsp").forward(request, response);
+//                break;
+//        
+//            case "/addStage": // создает etapp
+//                String categoryName =request.getParameter("categoryName");
+//                
+//                //создаем запись в БД
+//                Category category = new Category(categoryName);
+//                categoryFacade.create(category);
+//                request.setAttribute("category", category);
+//                
+//                // отправляем название категорий в переменную на странице и обновляем ее.
+//                request.setAttribute("info", "Этап "+category.getCategoryName()+" добавлен");
+//                request.getRequestDispatcher("/newStage").forward(request, response);
+//                break;
+            
         }
     }
 

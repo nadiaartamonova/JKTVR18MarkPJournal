@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 @Entity
-public class Order implements Serializable {
+public class Orders implements Serializable {
 
    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +32,10 @@ public class Order implements Serializable {
     private SubCategory subCategory;
     private boolean status;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order( String orderName, Client client, Date dateStart, Date dateFinish, float summa, Category category, SubCategory subCategory, boolean status) {
+    public Orders( String orderName, Client client, Date dateStart, Date dateFinish, float summa, Category category, SubCategory subCategory, boolean status) {
         
         this.orderName = orderName;
         this.client = client;
@@ -145,7 +145,7 @@ public class Order implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Order other = (Order) obj;
+        final Orders other = (Orders) obj;
         if (Float.floatToIntBits(this.summa) != Float.floatToIntBits(other.summa)) {
             return false;
         }
