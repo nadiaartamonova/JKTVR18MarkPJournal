@@ -1,31 +1,31 @@
-<%-- 
-    Document   : newClient
-    Created on : Jan 15, 2020, 9:26:40 AM
-    Author     : pupil
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Добавление нового клиента</h1>
-        
+
+              
         
         <p>${info}</p>
         <form action="addClient" method="POST">
-            Название: <input type="text" name="clientName" value="${clientName}"><br>
-            Reg.nr: <input type="text" name="regnr" value="${regnr}"><br>
-            Адресс: <input type="text" name="address" value="${address}"><br>
-            Телефон: <input type="text" name="phone" value="${phone}"><br>
-            Э-почта: <input type="text" name="email" value="${email}"><br>
-          
-            <input type="submit" value="Добавить нового клиента">
+
+          <fieldset>
+            <legend>Новый клиент</legend>
+            <div class="form-group row-cols-4">
+              <label class="col-sm-2 col-form-label">Имя клиента или название фирмы:</label> 
+              <input type="text" class="form-control" name="clientName" value="${clientName}"><br>
+
+              <label class="col-sm-2 col-form-label">Reg.nr: </label>
+              <input type="text" class="form-control" name="regnr" value="${regnr}"><br>
+
+              <label class="col-sm-2 col-form-label">Адресс: </label>
+              <input type="text" class="form-control" name="address" value="${address}"><br>
+
+              <label class="col-sm-2 col-form-label">Телефон: </label>
+              <input type="text" class="form-control" name="phone" value="${phone}"><br>
+
+              <label for="staticEmail" class="col-sm-2 col-form-label">Э-почта: </label>
+              <input type="email" class="form-control"  aria-describedby="emailHelp"  name="email" value="${email}"><br>
+
+            <button type="submit" class="btn btn-danger">Добавить</button> 
+            <a href="index.jsp"><button type="button" class="btn btn-danger">Главная страница</button> </a>
+          </fieldset>
         </form>
-        <a href="index.jsp">Главная страница</a>
         
-    </body>
-</html>

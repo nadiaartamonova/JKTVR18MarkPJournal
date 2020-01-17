@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-        <h1>Admin panel</h1>
+        <h1 >Admin panel</h1>
         
         <strong>Клиенты: </strong> <br>
         <a href="newClient"> Добавить нового клиента </a> <br>

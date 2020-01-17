@@ -68,6 +68,14 @@ public class MainServlet extends HttpServlet {
                 String phone =request.getParameter("phone");
                 String email =request.getParameter("email");
                 
+                // проверка на заполненное поле и пустое поле
+                if(null == clientName || "".equals(clientName))
+                        {
+                  request.setAttribute("info", "Заполните поле имя клиента");
+                  request.getRequestDispatcher("/newClient")
+                          .forward(request, response);
+                }
+                
                 Client client = new Client(clientName, Integer.parseInt(regnr), address, Integer.parseInt(phone), email);
                 clientFacade.create(client);
                 request.setAttribute("client", client);
@@ -98,6 +106,14 @@ public class MainServlet extends HttpServlet {
                 Category category = new Category(categoryName);
                 categoryFacade.create(category);
                 request.setAttribute("category", category);
+                
+                // проверка на заполненное поле и пустое поле
+                if(null == categoryName || "".equals(categoryName))
+                        {
+                  request.setAttribute("info", "Запомните и выберите все поля");
+                  request.getRequestDispatcher("/newCategory")
+                          .forward(request, response);
+                }
                 
                 // отправляем название категорий в переменную на странице и обновляем ее.
                 request.setAttribute("info", "Категория "+category.getCategoryName()+" добавленa");
