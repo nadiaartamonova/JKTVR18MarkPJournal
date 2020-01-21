@@ -15,7 +15,7 @@
               <input type="text" class="form-control" name="categoryName" value="${categoryName}"><br>
 
               
-            <button type="submit" class="btn btn-danger">Добавить</button> 
-            <a href="index.jsp"><button type="button" class="btn btn-danger">Главная страница</button> </a>
+            <button type="submit" class="btn btn-primary">Добавить</button> 
+            
           </fieldset>
         </form>

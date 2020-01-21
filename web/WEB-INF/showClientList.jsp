@@ -4,17 +4,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-        <h1>Список киентов:</h1>
-   
-            <ul>
-                <c:forEach var="client" items="${listAllClients}" varStatus="num">
-                    <li>
-                        ${num.index + 1}. ${client.clientName}. 
-                        
-                    </li>
-                </c:forEach>
-            </ul>
+        <h1>Список клиентов:</h1>
+
+                <table class="table table-hover">
+                    <thead>
+                      <tr class="bg-light">
+                        <th scope="col">№</th>
+                        <th scope="col">Имя клиента</th>
+                        <th scope="col">Телефон</th>
+                        <th scope="col">Редактирование</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach var="client" items="${listAllClients}" varStatus="num">  
+                        <tr>
+                          <th scope="row">${num.index + 1}.</th>
+                          <td>${client.clientName} </td>
+                          <td>${client.phone} </td>
+                          <td> <a href="editClient">Изменить</a></td>
+                        </tr>
+                      </c:forEach>
+                      
+                    </tbody>
+                  </table> 
+           
+            
             <br>
              
-            <a href="index.jsp"><button type="button" class="btn btn-danger">Главная страница</button> </a>
+            <a href="newClient"><button type="button" class="btn btn-primary">Новый клиент</button> </a>
 

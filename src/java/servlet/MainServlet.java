@@ -76,13 +76,14 @@ public class MainServlet extends HttpServlet {
                           .forward(request, response);
                 }
                 
+                
                 Client client = new Client(clientName, Integer.parseInt(regnr), address, Integer.parseInt(phone), email);
                 clientFacade.create(client);
                 request.setAttribute("client", client);
                 
                 
                 request.setAttribute("info", "Клиент "+client.getClientName()+" добавлен");
-                request.getRequestDispatcher("newClient").forward(request, response);
+                request.getRequestDispatcher("index").forward(request, response);
                 break;
                 
             case "/showClientList": // показывает страницу нового клиента

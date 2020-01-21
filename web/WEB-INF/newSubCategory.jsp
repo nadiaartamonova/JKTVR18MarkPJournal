@@ -16,8 +16,8 @@
             <label class="col-sm-2 col-form-label">Название:</label> 
             <input type="text"  class="form-control"placeholder="Название подкатегории" name="subCategoryName" value="${subCategoryName}"> <br>
                       
-            <button type="submit" class="btn btn-danger">Добавить</button> 
-            <a href="index.jsp"><button type="button" class="btn btn-danger">Главная страница</button> </a>
+            <button type="submit" class="btn btn-primary">Добавить</button> 
+            
           </fieldset>
         </form>
     

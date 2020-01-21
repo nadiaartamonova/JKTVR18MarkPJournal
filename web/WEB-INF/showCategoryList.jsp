@@ -4,16 +4,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
         <h1>Список категорий</h1>
-   
-            <ul>
-                <c:forEach var="category" items="${listAllCategories}" varStatus="num">
-                    <li>
-                        ${num.index + 1}. ${category.categoryName}. 
+            
+        <table class="table table-hover">
+                    <thead>
+                      <tr class="bg-light">
+                        <th scope="col">№</th>
+                        <th scope="col">Категория</th>
+                        <th scope="col">Подкатегория</th>
                         
-                    </li>
-                </c:forEach>
-            </ul>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach var="category" items="${listAllCategories}" varStatus="num">  
+                        <tr>
+                          <th scope="row">${num.index + 1}.</th>
+                          <td>${category.categoryName}.  </td>
+                          <td> </td>
+                          
+                        </tr>
+                      </c:forEach>
+                      
+                    </tbody>
+                  </table> 
+            
             <br>
             
-            <a href="index.jsp"><button type="button" class="btn btn-danger">Главная страница</button> </a>
-
+            <a href="newCategory"><button type="button" class="btn btn-primary">Добавить новую категорию</button> </a>
+            <a href="newSubCategory"><button type="button" class="btn btn-primary">Добавить новую подкатегорию</button> </a>

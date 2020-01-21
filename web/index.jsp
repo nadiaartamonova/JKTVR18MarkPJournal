@@ -2,9 +2,8 @@
 
         <h1 >Admin panel</h1>
         
-        <strong>Клиенты: </strong> <br>
-        <a href="newClient"> Добавить нового клиента </a> <br>
-        <a href="showClientList"> Список клиентов </a><br>
+        <p> ${info}</p>
+        
         
         <strong>Категории: </strong> <br>
         <a href="newCategory"> Добавить новую категорию </a> <br>
