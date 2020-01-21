@@ -4,7 +4,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
         <h1>Список категорий</h1>
-            
+        <p> ${info}</p>    
         <table class="table table-hover">
                     <thead>
                       <tr class="bg-light">
@@ -15,11 +15,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach var="category" items="${listAllCategories}" varStatus="num">  
+                      <c:forEach items="${listAllSubAndCat}" varStatus="num">  
                         <tr>
                           <th scope="row">${num.index + 1}.</th>
-                          <td>${category.categoryName}.  </td>
-                          <td> </td>
+                          <td>${listAllSubAndCat[0]}  </td>
+                          <td>${1} </td>
                           
                         </tr>
                       </c:forEach>

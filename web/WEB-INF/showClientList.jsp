@@ -21,7 +21,7 @@
                           <th scope="row">${num.index + 1}.</th>
                           <td>${client.clientName} </td>
                           <td>${client.phone} </td>
-                          <td> <a href="editClient">Изменить</a></td>
+                          <td> <a href="editClient?clientId=${client.id}">Изменить</a></td>
                         </tr>
                       </c:forEach>
                       

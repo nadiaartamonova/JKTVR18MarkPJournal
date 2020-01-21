@@ -24,6 +24,8 @@ import session.SubCategoryFacade;
     "/index",
     "/newClient",
     "/addClient",
+    "/editClient",
+    "/changeClient",
     "/showClientList",
     "/newCategory",
     "/addCategory",
@@ -32,6 +34,7 @@ import session.SubCategoryFacade;
     "/addSubCategory", 
     "/newStage",
     "/addStage",
+    
     
 
 })
@@ -69,7 +72,7 @@ public class MainServlet extends HttpServlet {
                 String email =request.getParameter("email");
                 
                 // проверка на заполненное поле и пустое поле
-                if(null == clientName || "".equals(clientName))
+                if(null == clientName )
                         {
                   request.setAttribute("info", "Заполните поле имя клиента");
                   request.getRequestDispatcher("/newClient")
@@ -77,7 +80,9 @@ public class MainServlet extends HttpServlet {
                 }
                 
                 
-                Client client = new Client(clientName, Integer.parseInt(regnr), address, Integer.parseInt(phone), email);
+                
+                
+                Client client = new Client(clientName, regnr, address, phone, email);
                 clientFacade.create(client);
                 request.setAttribute("client", client);
                 
@@ -92,7 +97,39 @@ public class MainServlet extends HttpServlet {
                 
                 request.getRequestDispatcher("/WEB-INF/showClientList.jsp").forward(request, response);
                 break;
-    
+            
+            case "/editClient": // показывает данные клиента на странице едитКлиент
+                String clientId = request.getParameter("clientId");
+                
+                client = clientFacade.find(Long.parseLong(clientId));
+                request.setAttribute("client", client);
+               
+                request.getRequestDispatcher("/WEB-INF/editClient.jsp").forward(request, response);
+                break;
+             case "/changeClient": // редактирует данные клиента
+                 //Считываем данные из формы
+                clientId = request.getParameter("clientId");
+                clientName =request.getParameter("clientName");
+                regnr =request.getParameter("regnr");
+                address =request.getParameter("address");
+                phone =request.getParameter("phone");
+                email =request.getParameter("email");
+                
+                //находим клиента по ид
+                client = clientFacade.find(Long.parseLong(clientId));
+                // записываем данны в переменные
+                client.setAddress(address);
+                client.setClientName(clientName);
+                client.setEmail(email);
+                client.setPhone(phone);
+                client.setRegnr(regnr);
+                
+                // сохраняем изменения клиента в базе.
+                clientFacade.edit(client);
+                request.setAttribute("info", "Данные отредактированы");
+               
+                request.getRequestDispatcher("/WEB-INF/showClientList.jsp").forward(request, response);
+                break;
                 
 //-------- категория -----------            
             case "/newCategory": // показывает страницу 
@@ -112,25 +149,25 @@ public class MainServlet extends HttpServlet {
                 if(null == categoryName || "".equals(categoryName))
                         {
                   request.setAttribute("info", "Запомните и выберите все поля");
-                  request.getRequestDispatcher("/newCategory")
+                  request.getRequestDispatcher("/showCategoryList")
                           .forward(request, response);
                 }
                 
                 // отправляем название категорий в переменную на странице и обновляем ее.
                 request.setAttribute("info", "Категория "+category.getCategoryName()+" добавленa");
-                request.getRequestDispatcher("newCategory").forward(request, response);
+                request.getRequestDispatcher("showCategoryList").forward(request, response);
                 break;
             
              case "/showCategoryList": // показывает страницу всех категорий
-                List<Category> listAllCategories = categoryFacade.findAll();
-                request.setAttribute("listAllCategories", listAllCategories);
+                List<CategorySubCategory> listAllSubAndCat = categorySubCategoryFacade.findSubAndCat();
+                request.setAttribute("listAllSubAndCat", listAllSubAndCat);
                 
                 request.getRequestDispatcher("/WEB-INF/showCategoryList.jsp").forward(request, response);
                 break;
     
 //-------- ПОДкатегория -----------             
             case "/newSubCategory": // показывает страницу 
-                listAllCategories = categoryFacade.findAll();
+                List<Category> listAllCategories = categoryFacade.findAll();
                 request.setAttribute("listAllCategories", listAllCategories);
                 
                 request.getRequestDispatcher("/WEB-INF/newSubCategory.jsp").forward(request, response);
@@ -166,7 +203,7 @@ public class MainServlet extends HttpServlet {
                 categorySubCategoryFacade.create(categorySubCategory);
                         
                 request.setAttribute("info", "Подкатегория "+subCategory.getSubCategoryName()+" добавленa");
-                request.getRequestDispatcher("/newStage").forward(request, response);
+                request.getRequestDispatcher("/showCategoryList").forward(request, response);
                 break;    
 //        
 ////-------- ЭТАПЫ -----------            

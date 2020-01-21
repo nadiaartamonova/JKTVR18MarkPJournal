@@ -16,6 +16,7 @@
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/newClient.jsp</url-pattern>
             <url-pattern>/WEB-INF/newCategory.jsp</url-pattern>
+            <url-pattern>/WEB-INF/editClient.jsp</url-pattern>
             <url-pattern>/WEB-INF/newSubCategory.jsp</url-pattern>
             <page-encoding>UTF-8</page-encoding>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>

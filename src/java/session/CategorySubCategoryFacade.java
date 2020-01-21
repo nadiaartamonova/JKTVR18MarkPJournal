@@ -6,6 +6,7 @@
 package session;
 
 import entity.CategorySubCategory;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,16 @@ public class CategorySubCategoryFacade extends AbstractFacade<CategorySubCategor
 
     public CategorySubCategoryFacade() {
         super(CategorySubCategory.class);
+    }
+
+    public List<CategorySubCategory> findSubAndCat() {
+        try {
+            return em.createNativeQuery("select subcategory.SUBCATEGORYNAME, category.CATEGORYNAME from categorysubcategory inner join subcategory ON subcategory.ID = categorysubcategory.SUBCATEGORY_ID INNER JOIN category ON categorysubcategory.CATEGORY_ID = category.ID")
+                    
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }

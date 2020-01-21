@@ -16,20 +16,80 @@ public class Client implements Serializable {
     private Long id;
 
     private String clientName;
-    private int regnr;
+    private String regnr;
     private String address;
-    private int phone;
+    private String phone;
     private String email;
 
     public Client() {
     }
 
-    public Client(String clientName, int regnr, String address, int phone, String email) {
+    public Client(String clientName, String regnr, String address, String phone, String email) {
         this.clientName = clientName;
         this.regnr = regnr;
         this.address = address;
         this.phone = phone;
         this.email = email;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.clientName);
+        hash = 79 * hash + Objects.hashCode(this.regnr);
+        hash = 79 * hash + Objects.hashCode(this.address);
+        hash = 79 * hash + Objects.hashCode(this.phone);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Client other = (Client) obj;
+        if (!Objects.equals(this.clientName, other.clientName)) {
+            return false;
+        }
+        if (!Objects.equals(this.regnr, other.regnr)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+    @Override
+    public String toString() {
+        return "Client{" 
+                + "id=" + id 
+                + ", clientName=" + clientName 
+                + ", regnr=" + regnr 
+                + ", address=" + address 
+                + ", phone=" + phone 
+                + ", email=" + email 
+                
+                + '}';
     }
 
     public Long getId() {
@@ -48,11 +108,11 @@ public class Client implements Serializable {
         this.clientName = clientName;
     }
 
-    public int getRegnr() {
+    public String getRegnr() {
         return regnr;
     }
 
-    public void setRegnr(int regnr) {
+    public void setRegnr(String regnr) {
         this.regnr = regnr;
     }
 
@@ -64,11 +124,11 @@ public class Client implements Serializable {
         this.address = address;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -78,64 +138,6 @@ public class Client implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.clientName);
-        hash = 97 * hash + this.regnr;
-        hash = 97 * hash + Objects.hashCode(this.address);
-        hash = 97 * hash + this.phone;
-        hash = 97 * hash + Objects.hashCode(this.email);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Client other = (Client) obj;
-        if (this.regnr != other.regnr) {
-            return false;
-        }
-        if (this.phone != other.phone) {
-            return false;
-        }
-        if (!Objects.equals(this.clientName, other.clientName)) {
-            return false;
-        }
-        if (!Objects.equals(this.address, other.address)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" 
-                + "id=" + id 
-                + ", clientName=" + clientName 
-                + ", regnr=" + regnr 
-                + ", address=" + address 
-                + ", phone=" + phone 
-                + ", email=" + email 
-                
-                + '}';
     }
     
     
