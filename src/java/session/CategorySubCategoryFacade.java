@@ -32,7 +32,7 @@ public class CategorySubCategoryFacade extends AbstractFacade<CategorySubCategor
 
     public List<CategorySubCategory> findSubAndCat() {
         try {
-            return em.createNativeQuery("select subcategory.SUBCATEGORYNAME, category.CATEGORYNAME from categorysubcategory inner join subcategory ON subcategory.ID = categorysubcategory.SUBCATEGORY_ID INNER JOIN category ON categorysubcategory.CATEGORY_ID = category.ID")
+            return em.createNativeQuery("SELECT category.CATEGORYNAME, subcategory.SUBCATEGORYNAME FROM categorysubcategory INNER JOIN subcategory ON subcategory.ID = categorysubcategory.SUBCATEGORY_ID INNER JOIN category ON categorysubcategory.CATEGORY_ID = category.ID ORDER BY category.CATEGORYNAME")
                     
                     .getResultList();
         } catch (Exception e) {

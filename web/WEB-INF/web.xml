@@ -12,6 +12,7 @@
         <jsp-property-group>
             <display-name>template</display-name>
             <url-pattern>/WEB-INF/showCategoryList.jsp</url-pattern>
+            <url-pattern>/WEB-INF/newOrder.jsp</url-pattern>
             <url-pattern>/WEB-INF/showClientList.jsp</url-pattern>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/newClient.jsp</url-pattern>

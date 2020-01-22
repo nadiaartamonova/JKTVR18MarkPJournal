@@ -7,7 +7,9 @@ import entity.Client;
 import entity.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +36,8 @@ import session.SubCategoryFacade;
     "/addSubCategory", 
     "/newStage",
     "/addStage",
-    
+    "/newOrder",
+    "/addOrder",
     
 
 })
@@ -78,9 +81,6 @@ public class MainServlet extends HttpServlet {
                   request.getRequestDispatcher("/newClient")
                           .forward(request, response);
                 }
-                
-                
-                
                 
                 Client client = new Client(clientName, regnr, address, phone, email);
                 clientFacade.create(client);
@@ -160,6 +160,8 @@ public class MainServlet extends HttpServlet {
             
              case "/showCategoryList": // показывает страницу всех категорий
                 List<CategorySubCategory> listAllSubAndCat = categorySubCategoryFacade.findSubAndCat();
+                
+                
                 request.setAttribute("listAllSubAndCat", listAllSubAndCat);
                 
                 request.getRequestDispatcher("/WEB-INF/showCategoryList.jsp").forward(request, response);
@@ -204,7 +206,24 @@ public class MainServlet extends HttpServlet {
                         
                 request.setAttribute("info", "Подкатегория "+subCategory.getSubCategoryName()+" добавленa");
                 request.getRequestDispatcher("/showCategoryList").forward(request, response);
-                break;    
+                break;
+//-------- Заказ -----------
+                case "/newOrder": // показывает страницу 
+                listAllCategories = categoryFacade.findAll();
+                List<SubCategory> listAllSubCategories = subCategoryFacade.findAll();
+                listAllClients = clientFacade.findAll();
+                
+                request.setAttribute("listAllClients", listAllClients);
+                request.setAttribute("listAllSubCategories", listAllSubCategories);
+                request.setAttribute("listAllCategories", listAllCategories);
+                
+                request.getRequestDispatcher("/WEB-INF/newOrder.jsp").forward(request, response);
+                break;
+                
+                case "/addOrder": // показывает страницу 
+                
+                break;
+                
 //        
 ////-------- ЭТАПЫ -----------            
 //            case "/newStage": // показывает страницу 

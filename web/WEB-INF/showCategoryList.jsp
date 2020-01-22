@@ -15,13 +15,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${listAllSubAndCat}" varStatus="num">  
+                      <c:forEach var="items" items="${listAllSubAndCat}" varStatus="num">  
+                         
                         <tr>
                           <th scope="row">${num.index + 1}.</th>
-                          <td>${listAllSubAndCat[0]}  </td>
-                          <td>${1} </td>
+                           <c:forEach var="item" items="${items}">
+                            <td>${item}</td>
+                           </c:forEach>
                           
                         </tr>
+                         
                       </c:forEach>
                       
                     </tbody>

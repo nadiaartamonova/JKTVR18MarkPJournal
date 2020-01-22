@@ -13,8 +13,5 @@ function json(response){
     return response.json();
 }
 
-function addStage(){
-    let 
-    
-}
+
 
