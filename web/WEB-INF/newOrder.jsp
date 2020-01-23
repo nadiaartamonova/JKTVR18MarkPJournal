@@ -31,19 +31,17 @@
               <input type="date" class="form-control" name="dateFinish" value="${dateFinish}"><br>
               
               <label class="col-sm-2 col-form-label">Категория:  </label>
-              <select name="category" class="form-control" id="categoriesList">
+              <select name="category" class="form-control" id="category">
                 <option value="" hidden=""></option>
                 <c:forEach var="category" items="${listAllCategories}">
                     <option value="${category.id}">${category.categoryName}</option>
                 </c:forEach>
               </select><br>
               
-              <label class="col-sm-2 col-form-label" hidden = true>Подкатегория:  </label>
-              <select name="subCategory" class="form-control" id="subCategoryList" hidden = true>
-                <option value="" hidden=""></option>
-                <c:forEach var="subCategory" items="${listAllSubCategories}">
-                    <option value="${subCategory.id}">${subCategory.subCategoryName}</option>
-                </c:forEach>
+              <label class="col-sm-2 col-form-label" id="subCategoryListLabel" style="display: none;">Подкатегория:  </label>
+              <select name="subCategory" class="form-control" id="subCategoryList" style="display: none;">
+                
+                
               </select><br>
 
             <button type="submit" class="btn btn-primary">Добавить</button> 

@@ -210,11 +210,11 @@ public class MainServlet extends HttpServlet {
 //-------- Заказ -----------
                 case "/newOrder": // показывает страницу 
                 listAllCategories = categoryFacade.findAll();
-                List<SubCategory> listAllSubCategories = subCategoryFacade.findAll();
+                //List<SubCategory> listAllSubCategories = subCategoryFacade.findAll();
                 listAllClients = clientFacade.findAll();
                 
                 request.setAttribute("listAllClients", listAllClients);
-                request.setAttribute("listAllSubCategories", listAllSubCategories);
+              //  request.setAttribute("listAllSubCategories", listAllSubCategories);
                 request.setAttribute("listAllCategories", listAllCategories);
                 
                 request.getRequestDispatcher("/WEB-INF/newOrder.jsp").forward(request, response);
