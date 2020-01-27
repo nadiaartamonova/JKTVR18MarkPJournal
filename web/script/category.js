@@ -50,15 +50,18 @@ document.getElementById("category").onchange=function(){
          
     };
     
-      //select SUBcategory print    
+//select SUBcategory print    
     function printSubCategory(subCategoryListByCategory) {
         
-        let selectedOption = subCategoryListByCategory.options[subCategoryListByCategory.selectedIndex];
-        
-
+        //let selectedOption = subCategoryListByCategory.options[subCategoryListByCategory.selectedIndex];
+               
+        let option = new Option("","");
+        subCategoryList.append(option);
         for (let i in subCategoryListByCategory){
-          let newOption = new Option(subCategoryListByCategory[i][subCategoryName],subCategoryListByCategory[i][id]);
-          console.log(i);
+          
+          console.log(subCategoryListByCategory[i].subCategoryName, subCategoryListByCategory[i].id);
+          let newOption = new Option(subCategoryListByCategory[i].subCategoryName, subCategoryListByCategory[i].id);
+          
           subCategoryList.append(newOption);
         }
 

@@ -1,6 +1,7 @@
 
 package servlet;
 
+import com.google.gson.Gson;
 import entity.Category;
 import entity.CategorySubCategory;
 import entity.Client;
@@ -228,9 +229,12 @@ public class MainServlet extends HttpServlet {
                 
                     List<SubCategory> subCategoryListByCategory = categorySubCategoryFacade.findSubCategoryListByCategory(categoryId);
                     
-                    request.setAttribute("subCategoryListByCategory", subCategoryListByCategory);
-                    request.getRequestDispatcher("/WEB-INF/newOrder.jsp").forward(request, response);
-                break;
+                    
+                    String json = new Gson().toJson(subCategoryListByCategory);  
+                    try (PrintWriter out = response.getWriter()) {
+                      out.println(json);
+                    }
+                    break;
                 
                 case "/addOrder": // показывает страницу 
                 
