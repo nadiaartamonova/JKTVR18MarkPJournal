@@ -6,6 +6,7 @@
 package session;
 
 import entity.CategorySubCategory;
+import entity.SubCategory;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,6 +37,16 @@ public class CategorySubCategoryFacade extends AbstractFacade<CategorySubCategor
                     
                     .getResultList();
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<SubCategory> findSubCategoryListByCategory(String categoryId) {
+         try {
+            return em.createQuery("SELECT categorySubCategory.subCategory FROM CategorySubCategory categorySubCategory WHERE categorySubCategory.category.id = :categoryId")
+                    .setParameter("categoryId", Long.parseLong(categoryId))
+                    .getResultList();
+    } catch (Exception e) {
             return null;
         }
     }

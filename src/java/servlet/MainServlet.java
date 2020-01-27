@@ -38,6 +38,7 @@ import session.SubCategoryFacade;
     "/addStage",
     "/newOrder",
     "/addOrder",
+    "/subCategoryList"
     
 
 })
@@ -210,14 +211,25 @@ public class MainServlet extends HttpServlet {
 //-------- Заказ -----------
                 case "/newOrder": // показывает страницу 
                 listAllCategories = categoryFacade.findAll();
-                //List<SubCategory> listAllSubCategories = subCategoryFacade.findAll();
                 listAllClients = clientFacade.findAll();
                 
+                
+                
                 request.setAttribute("listAllClients", listAllClients);
-              //  request.setAttribute("listAllSubCategories", listAllSubCategories);
+                
                 request.setAttribute("listAllCategories", listAllCategories);
                 
                 request.getRequestDispatcher("/WEB-INF/newOrder.jsp").forward(request, response);
+                break;
+                
+                case "/subCategoryList": // показывает страницу 
+                    categoryId = request.getParameter("categoryId");
+                    
+                
+                    List<SubCategory> subCategoryListByCategory = categorySubCategoryFacade.findSubCategoryListByCategory(categoryId);
+                    
+                    request.setAttribute("subCategoryListByCategory", subCategoryListByCategory);
+                    request.getRequestDispatcher("/WEB-INF/newOrder.jsp").forward(request, response);
                 break;
                 
                 case "/addOrder": // показывает страницу 

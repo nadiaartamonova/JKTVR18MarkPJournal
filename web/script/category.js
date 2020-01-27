@@ -14,13 +14,15 @@ function json(response){
 }
 
 //test data
-let subCategoryListByCategory = [
-    [1, 'Наклейки'],
-    [2, 'Плакаты'],
-    [3, 'Флаеры'],
-    [4, 'Визитки'],
-    [5, 'Дипломы']
-];
+//let subCategory={'id':'subCategoryName'};
+//
+//let subCategoryListByCategory = [
+//    {'0': 'Наклейки'},
+//    {'2': 'Плакаты'},
+//    {'3': 'Флаеры'},
+//    {'4': 'Визитки'},
+//    {'5': 'Дипломы'}
+//];
 
 
 
@@ -31,22 +33,42 @@ document.getElementById("category").onchange=function(){
     let categoryId = this.value;
     console.log(categoryId);
     
-    //subcategory
+    //subcategory show
     document.getElementById("subCategoryListLabel").style.display="block";
     document.getElementById("subCategoryList").style.display="block";
-           
+    let url = 'subCategoryList?categoryId='+categoryId;
+    fetch(url).then(status)  
+          .then(json)
+          .then(function(subCategoryListByCategory) {  
+                printSubCategory(subCategoryListByCategory);
+                console.log('Request succeeded with JSON response', subCategoryListByCategory);
+                
+          })
+          .catch(function(error) {  
+            console.log('Request failed', error);  
+          });
+         
     };
     
-function printSubCategoryList(subCategoryListByCategory){
-    let str='';
-    for(let i in data){
-        str += `
-            <option value="" hidden=""></option>
-            <option value="${data[1].subCategory.id}">${data[1].subCategory.Name}</option>
-        `
+      //select SUBcategory print    
+    function printSubCategory(subCategoryListByCategory) {
+        
+        let selectedOption = subCategoryListByCategory.options[subCategoryListByCategory.selectedIndex];
+        
+
+        for (let i in subCategoryListByCategory){
+          let newOption = new Option(subCategoryListByCategory[i][subCategoryName],subCategoryListByCategory[i][id]);
+          console.log(i);
+          subCategoryList.append(newOption);
+        }
+
+        newOption.selected = true;  
     }
-}    
-document.getElementById("subCategoryList").innerHTML = str;
+
+
+
+
+
 
 
 

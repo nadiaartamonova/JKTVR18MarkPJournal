@@ -5,7 +5,9 @@
  */
 package session;
 
+
 import entity.SubCategory;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,9 @@ public class SubCategoryFacade extends AbstractFacade<SubCategory> {
     public SubCategoryFacade() {
         super(SubCategory.class);
     }
+
+    
+
+    
     
 }
