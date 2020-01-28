@@ -14,7 +14,7 @@
         
         
         <link rel="stylesheet" href="css/bootstrap.css">
-        
+       
         
         <title>MarkPartnerid</title>
     </head>
@@ -61,4 +61,4 @@
             
           </div>
         </nav>
-        <div class="container" style="margin-top: 40px;">
+        <div class="container">
